@@ -15,8 +15,9 @@ export default async function GalleryPage({
     search: string;
   };
 }) {
+  const folderPath = 'fizz-dragon/gallery';
   const results = (await cloudinary.v2.search
-    .expression(`resource_type:image${search ? ` AND tags=${search}` : ""}`)
+    .expression(`folder:${folderPath}${search ? ` AND tags=${search}` : ""}`)
     .sort_by("created_at", "desc")
     .with_field("tags")
     .max_results(30)
